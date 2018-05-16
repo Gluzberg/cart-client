@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CartClient.Models.Imp\CartClient.Models.Imp.csproj" />
+    <ProjectReference Include="..\CartClient.Models\CartClient.Models.csproj" />
+    <ProjectReference Include="..\CartClient.Services\CartClient.Services.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,93 @@
+﻿@using CartClient.Demo.Web.Models
+
+@model CartViewModel
+
+@{ bool notEmpty = Model.Elements.Any(); }
+<div class="panel panel-info">
+    <div class="panel-heading">
+
+        <div class="row">
+            <div class="col-xs-6">
+                <h5><span class="glyphicon glyphicon-shopping-cart"></span> Cart </h5>
+            </div>
+            @if (notEmpty)
+            {
+                <div class="col-xs-6">
+                    <h5 class="text-right">
+                        <a class="btn btn btn-link btn-xs"
+                           href="@Url.Action("ClearCart", new { cartId = Model.CartId } )">
+                            <span class="glyphicon glyphicon-repeat"> </span>  Start Over
+                        </a>
+                    </h5>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="panel-body">
+        @foreach (CartElementViewModel element in Model.Elements.OrderBy(m => m.Product.Id))
+        {
+        <div class="row">
+
+            <div class="col-xs-4">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <img class="img-responsive" src="@element.Product.Image" />
+
+                    </div>
+
+                    <div class="panel-info">
+                        <h5 class="text-center"><strong>@element.Product.Name</strong></h5>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-xs-3 text-center">
+                <strong>€ @element.Product.Price </strong>
+            </div>
+
+            <div class="col-xs-3 text-center">
+
+                <a class="btn btn btn-link btn-xs"
+                   href="@Url.Action("DecreaseProduct", new { cartId = Model.CartId, productId = @element.Product.Id, amount = @element.Amount } )">
+                    <span class="glyphicon glyphicon-minus"> </span>
+                </a>
+                <strong> @element.Amount</strong>
+                <a class="btn btn btn-link btn-xs"
+                   href="@Url.Action("IncreaseProduct", new { cartId = Model.CartId, productId = @element.Product.Id, amount = @element.Amount } )">
+                    <span class="glyphicon glyphicon-plus"> </span>
+                </a>
+
+            </div>
+
+            <div class="col-xs-1 text-center">
+                <a class="btn btn btn-link btn-xs"
+                   href="@Url.Action("RemoveProduct", new { cartId = Model.CartId, productId = @element.Product.Id } )">
+                    <span class="glyphicon glyphicon-trash"> </span>
+               </a>
+
+            </div>
+
+        </div>
+        }
+    </div>
+
+    @if (notEmpty)
+    {
+        <div class="panel-footer">
+            <div class="row text-center">
+                <div class="col-xs-6">
+                    <button type="button" class="btn btn-primary btn-block">
+                        <span class="glyphicon glyphicon-euro"> </span>  Payment
+                    </button>
+                </div>
+                <div class="col-xs-6">
+                    <h4 class="text-center">Total <strong>€ @Model.Total</strong></h4>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

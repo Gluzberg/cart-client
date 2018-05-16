@@ -1,0 +1,68 @@
+﻿@using CartClient.Demo.Web.Services.Models;
+@using CartClient.Demo.Web.Models;
+@model CatalogViewModel
+
+@{
+    int position = 0;
+
+    IEnumerable<IGrouping<int, Tuple<int, IProduct>>> groups = Model.
+        Products.
+        Select(m => new Tuple<int, IProduct>(position++, m)).
+        GroupBy(p => p.Item1 / 3);
+}
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+
+        <div class="row">
+            <div class="col-xs-6">
+                <h5><span class="glyphicon glyphicon-list"></span> Catalog </h5>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="panel-body">
+
+        @foreach (IGrouping<int, Tuple<int, IProduct>> group in groups)
+            {
+            <div class="row">
+
+                @foreach (IProduct product in group.Select(t => t.Item2))
+                {
+
+                    <div class="col-xs-4 text-center">
+
+                        <div class="panel panel-default">
+
+                            <div class="panel-heading">
+                                <img class="img-responsive" src="@product.Image" />
+
+
+                            </div>
+
+                            <div class="panel-info">
+                                <h5><strong>@product.Name</strong></h5>
+                                <h5>€ @product.Price</h5>
+                            </div>
+
+                            <div class="panel-footer">
+
+                                <a class="btn btn-primary btn-block"
+                                   href="@Url.Action("AddProduct", new { cartId = Model.CartId, productId = product.Id } )">Add</a>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                }
+
+            </div>
+        }
+    </div>
+
+    <div class="panel-footer">
+
+    </div>
+</div>

@@ -1,0 +1,26 @@
+﻿@model Guid
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="~/demo-resources/images/stage.jpg" alt="ASP.NET" class="img-responsive" />
+            <div class="carousel-caption" role="option">
+                <p>
+                    Store Demo
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="margin-top: -30px; margin-left: 30px; padding-right: 30px;">
+
+    <div class="row">
+        <div class="col-xs-7">
+            @await Component.InvokeAsync("Catalog", Model)
+        </div>
+        <div class="col-xs-5">
+            @await Component.InvokeAsync("Cart", Model)
+        </div>
+    </div>
+</div>

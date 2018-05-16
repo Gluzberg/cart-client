@@ -1,0 +1,14 @@
+﻿{
+  "Elements": [
+    {
+      "Product": {
+        "id": "bd3a016f-d0f0-4042-a976-cfaad7689b01",
+        "Name": "Test Product 1",
+        "Price": "19.99",
+        "Image": "/demo-resources/images/product_1.jpg"
+      },
+      "Amount": "17"
+    }
+  ],
+  "Total" :  "19.99"
+}
