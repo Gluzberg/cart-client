@@ -5,6 +5,7 @@ using CartClient.Request.WebRequest.Imp;
 using CartClient.Request.WebRequest.Parameter.Content.Imp;
 using CartClient.Request.WebRequest.Parameter.Imp;
 using CartClient.Services.Models;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -49,9 +50,18 @@ namespace CartClient.Services.Internal.Imp
                         Content = new JsonContent(credentials)
                     });
 
-                result.Wait();
-                
-                this.AuthenticationInfo = result != null  && result.IsCompleted ? result.Result : null;
+                try
+                {
+                    result.Wait();
+                }
+                catch (Exception e)
+                {
+                }
+
+                this.AuthenticationInfo = 
+                    result != null  && result.IsCompleted && result.Status == TaskStatus.RanToCompletion ? 
+                    result.Result : 
+                    null;
             }
 
             return this.AuthenticationInfo;

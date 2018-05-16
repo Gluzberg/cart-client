@@ -14,6 +14,11 @@ namespace CartClient.Services.Models
     /// </author>
     public class CartInfo : ICartInfo
     {
+        public CartInfo()
+        {
+            this.ProductsRaw = new ProductInfo[0];
+        }
+
         /// <summary>
         /// Gets or sets the cart identifier.
         /// </summary>

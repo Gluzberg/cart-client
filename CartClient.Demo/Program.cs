@@ -26,7 +26,7 @@ namespace CartClient.Demo
         static void Main(string[] args)
         {
             //Setup of DI
-            var serviceProvider = new ServiceCollection()
+            IServiceProvider serviceProvider = new ServiceCollection()
                 .AddSingleton<IConfigurationService, ConfigurationService>()
                 .AddSingleton<ITokenService, TokenService>()
                 .AddSingleton<ICartService, CartService>()
@@ -36,10 +36,12 @@ namespace CartClient.Demo
 
             try
             {
-                string line;
+                Console.Clear();
 
                 Console.Write(Labels.Feedback.EnterAction);
 
+                string line;
+                
                 while (!Labels.Quit.Equals((line = Console.ReadLine().Trim())))
                 {
                     string[] parameters = line.Split(' ');
@@ -94,8 +96,6 @@ namespace CartClient.Demo
                 Console.WriteLine(Labels.Feedback.Exit);
 
             }
-
-            Console.ReadKey();
         }
 
         /// <summary>

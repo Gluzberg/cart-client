@@ -41,13 +41,16 @@ namespace WebProject.Controllers
             {
                 ICartInfo cart = this.CartService.CreateCart();
 
-                CookieOptions option = new CookieOptions();
+                if (cart != null)
+                {
+                    CookieOptions option = new CookieOptions();
 
-                option.Expires = DateTime.Now.AddHours(1);
+                    option.Expires = DateTime.Now.AddHours(1);
 
-                Response.Cookies.Append(Labels.CookieName, cart.CartId.ToString(), option);
+                    Response.Cookies.Append(Labels.CookieName, cart.CartId.ToString(), option);
 
-                return LocalRedirect(Request.Path);
+                    return LocalRedirect(Request.Path);
+                }
             }
 
             return View("Index", cartId);

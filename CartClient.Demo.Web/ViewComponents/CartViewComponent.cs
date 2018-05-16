@@ -2,6 +2,7 @@
 using CartClient.Demo.Web.Services;
 using CartClient.Models;
 using CartClient.Services;
+using CartClient.Services.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace CartClient.Demo.Web.ViewComponents
         /// <returns></returns>
         public IViewComponentResult Invoke(Guid cartId)
         {
-            ICartInfo cartInfo = this.CartService.GetCartInfo(cartId);
+            ICartInfo cartInfo = this.CartService.GetCartInfo(cartId) ?? new CartInfo();
 
             CartViewModel cart = new CartViewModel()
             {
