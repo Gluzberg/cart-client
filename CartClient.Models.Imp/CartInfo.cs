@@ -33,6 +33,7 @@ namespace CartClient.Services.Models
         /// <value>
         /// The products.
         /// </value>
+        [JsonIgnore]
         public IEnumerable<IProductInfo> Products
         {
             get
@@ -47,7 +48,7 @@ namespace CartClient.Services.Models
         /// <value>
         /// The products raw.
         /// </value>
-        [JsonProperty("products")]
+        [JsonProperty("Products")]
         public ProductInfo[] ProductsRaw { get; set; }
     }
 }

@@ -44,6 +44,8 @@ namespace CartClient.Demo
                 
                 while (!Labels.Quit.Equals((line = Console.ReadLine().Trim())))
                 {
+                    Console.Clear();
+
                     string[] parameters = line.Split(' ');
 
                     Func<ICartService, Guid, Guid, uint, bool> action = null;
@@ -66,8 +68,6 @@ namespace CartClient.Demo
                         uint.TryParse(length > 3 ? parameters[3] : string.Empty, out amount);
 
                         bool result = action(cartService, cartId, productId, amount);
-
-                        Console.Clear();
 
                         Console.WriteLine(
                             string.Format(Labels.Feedback.ResultAction,
@@ -122,6 +122,7 @@ namespace CartClient.Demo
                     "\t(i)nfo\t\t(cart ID) \n" +
                     "\t(a)dd\t\t(cart ID)\t(Product ID)\t(Amount)\n" +
                     "\t(m)odify\t(cart ID)\t(Product ID)\t(Amount)\n" +
+                    "\t(r)remove\t(cart ID)\t(Product ID)\n" +
                     "\t(d)elete\t(cart ID)\t(Product ID)\n" + 
                     "\t(q)uit\n\n> ";
 
@@ -149,7 +150,7 @@ namespace CartClient.Demo
                 /// <summary>
                 /// The result to text
                 /// </summary>
-                public static readonly Func<bool, string> ResultToText = m => m ? "Succesful" : "Unsuccessful";
+                public static readonly Func<bool, string> ResultToText = m => m ? "Successful" : "Unsuccessful";
             }
         }
 

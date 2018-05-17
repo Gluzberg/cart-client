@@ -10,6 +10,7 @@ using CartClient.Services.Internal;
 using CartClient.Request.WebRequest.Parameter.Header.Imp;
 using System.Collections.Specialized;
 using CartClient.Services.Models;
+using System.Linq;
 
 namespace CartClient.Services
 {
@@ -79,6 +80,13 @@ namespace CartClient.Services
         /// </returns>
         public bool AddProduct(Guid cartId, IProductInfo product)
         {
+            ICartInfo existingCart = this.Request<CartInfo>(HttpMethod.Get, cartId);
+
+            if (existingCart == null || existingCart.Products.Any(p => p.ProductId.Equals(product.ProductId)))
+            {
+                return false;
+            }
+
             ICartInfo cart = new CartInfo()
             {
                 CartId = cartId,
@@ -98,6 +106,13 @@ namespace CartClient.Services
         /// </returns>
         public bool EditProduct(Guid cartId, IProductInfo product)
         {
+            ICartInfo existingCart = this.Request<CartInfo>(HttpMethod.Get, cartId);
+
+            if (existingCart == null || !existingCart.Products.Any(p => p.ProductId.Equals(product.ProductId)))
+            {
+                return false;
+            }
+
             ICartInfo cart = new CartInfo()
             {
                 CartId = cartId,
@@ -117,6 +132,13 @@ namespace CartClient.Services
         /// </returns>
         public bool RemoveProduct(Guid cartId, Guid productId)
         {
+            ICartInfo existingCart = this.Request<CartInfo>(HttpMethod.Get, cartId);
+
+            if (existingCart == null || !existingCart.Products.Any(p => p.ProductId.Equals(productId)))
+            {
+                return false;
+            }
+
             ICartInfo cart = new CartInfo()
             {
                 CartId = cartId,
