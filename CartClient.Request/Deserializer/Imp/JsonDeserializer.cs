@@ -27,7 +27,7 @@ namespace CartClient.Request.Deserializer.Imp
                 {
                     return JsonConvert.DeserializeObject<T>(parameters.Value, new JsonSerializerSettings() { });
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     return default(T);
                 }

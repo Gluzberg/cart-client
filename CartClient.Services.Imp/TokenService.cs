@@ -54,7 +54,7 @@ namespace CartClient.Services.Internal.Imp
                 {
                     result.Wait();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                 }
 
