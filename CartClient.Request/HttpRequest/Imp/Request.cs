@@ -48,7 +48,7 @@ namespace CartClient.Request.WebRequest.Imp
                     Value = response.Content.ReadAsStringAsync().Result
                 });
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return default(T);
             }
